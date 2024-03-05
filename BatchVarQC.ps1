@@ -38,7 +38,7 @@
             $variables += $variable
         }
     }
-    # Return Variables to Hashtable for quick access...
+    # Return Variables to Hashtable...
     return @{
         Variables = $variables
     }
@@ -57,7 +57,7 @@ $misplacedQuotesVariables = @()
 
 foreach ($variable in $variables) {
     $valueToDisplay = "[$($variable.LineNumber)] $($variable.Line)"
-    # Check if the value for quotes...
+    # Check quote placement...
     if ($variable.Name -like '"*' -or $variable.Value -like '"*' -and $variable.Value -notlike '*"') {
         $misplacedQuotesVariables += $valueToDisplay
     }
@@ -76,7 +76,7 @@ $linesWithMissingQuotes = @()
 
 foreach ($variable in $variables) {
     $valueToDisplay = "[$($variable.LineNumber)] $($variable.Line)"
-    # Check if the value has quotes...
+    # Check quote placement...
     if (($variable.Value -like '*"' -and $variable.Value -notlike '"*"') -and $variable.Name -notlike '"*') {
         $linesWithMissingQuotes += $valueToDisplay
     }
